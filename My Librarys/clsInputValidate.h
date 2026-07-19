@@ -2,23 +2,43 @@
 
 #include <iostream>
 #include <string>
-#include <limits>
 #include <vector>
+#include "clsString.h"
+#include "clsDate.h"
 
 using namespace std;
 
 class clsInputValidate
 {
 private:
+    static bool FromIsAfterTo(clsDate from, clsDate to)
+    {
+        if (clsDate::IsDate1AfterDate2(from, to))
+            return true;
+        
+        return false;
+    }
+
 public:
     template <typename ty>
-    static bool IsNumberBetween(ty target, ty start, ty end)
+    static bool IsNumberBetween(ty date, ty start, ty end)
     {
-        return (start < target && target < end);
+        return (start < date && date < end);
+    }
+
+    static bool IsDateBetween(clsDate date, clsDate from, clsDate to)
+    {
+        if (FromIsAfterTo(from, to))
+            clsDate::SwapDates(from, to);
+
+        if (clsDate::IsDate1BeforeDate2(from, date) && clsDate::IsDate1AfterDate2(to, date))
+            return true;
+
+        return false;
     }
 
     template <typename ty>
-    static ty ReadNumber(string invalid)
+    static ty ReadNumber(string invalid = "Invalid Number, Enter again : ")
     {
         ty num;
         while (true)
@@ -35,13 +55,13 @@ public:
     }
 
     template <typename ty>
-    static ty ReadNumberBetween(int start, int end, string invalid)
+    static ty ReadNumberBetween(ty start, ty end, string invalid)
     {
         ty num;
         while (true)
         {
             cin >> num;
-            if (cin && start < num && num < end)
+            if (cin && IsDateBetween(num, start, end))
                 return num;
 
             cin.clear();
@@ -74,4 +94,5 @@ public:
         }
         return v;
     }
+
 };
