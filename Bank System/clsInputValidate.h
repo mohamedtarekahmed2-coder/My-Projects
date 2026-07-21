@@ -38,7 +38,7 @@ public:
     }
 
     template <typename ty>
-    static ty ReadNumber(string invalid = "Invalid Number, Enter again : ")
+    static ty Read(string invalid = "Invalid Number, Enter again : ")
     {
         ty num;
         while (true)

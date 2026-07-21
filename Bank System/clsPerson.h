@@ -16,38 +16,38 @@ public:
                 : first_name(first_name), last_name(last_name), email(email), phone(phone) {}
 
 // Getters & Setters
-    string get_first_name()
+    string GetFirstName()
     {
         return first_name;
     }
-    void set_first_name(const string &name)
+    void SetFirstName(const string &name)
     {
         first_name = name;
     }
 
-    string get_last_name()
+    string GetLastName()
     {
         return last_name;
     }
-    void set_last_name(const string &name)
+    void SetLastName(const string &name)
     {
         last_name = name;
     }
 
-    string get_email()
+    string GetEmail()
     {
         return email;
     }
-    void set_email(const string &email_)
+    void SetEmail(const string &email_)
     {
         email = email_;
     }
 
-    string get_phone()
+    string GetPhone()
     {
         return phone;
     }
-    void set_phone(const string &phone_)
+    void SetPhone(const string &phone_)
     {
         phone = phone_;
     }
