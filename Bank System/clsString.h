@@ -32,7 +32,7 @@ public:
     {
         _value = "";
     }
-    
+
     clsString(const string &str) : _value(str) {}
 
     void SetValue(const string &str)
@@ -258,10 +258,7 @@ public:
         while ((pos = str.find(delim)) != string::npos)
         {
             sWord = str.substr(0, pos);
-            if (!sWord.empty())
-            {
-                vString.push_back(sWord);
-            }
+            vString.push_back(sWord); 
             str.erase(0, pos + delim.length());
         }
 

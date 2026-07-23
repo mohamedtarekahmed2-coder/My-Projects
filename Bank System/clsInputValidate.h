@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <limits>
 #include "clsString.h"
 #include "clsDate.h"
 
@@ -61,7 +62,7 @@ public:
         while (true)
         {
             cin >> num;
-            if (cin && IsDateBetween(num, start, end))
+            if (cin && IsNumberBetween(num, start, end))
                 return num;
 
             cin.clear();

@@ -76,7 +76,7 @@ public:
         string Word;
         for (int i = 1; i <= Length; i++)
             Word = Word + GetRandomCharacter(CharType);
-        
+
         return Word;
     }
 
@@ -119,7 +119,7 @@ public:
             arr[i] = GenerateKey(CharType);
     }
 
-    template<typename ty>
+    template <typename ty>
     static void Swap(ty &A, ty &B)
     {
         ty Temp;
@@ -162,7 +162,7 @@ public:
     {
         for (int i = 0; i <= Text.length(); i++)
             Text[i] = char((int)Text[i] + EncryptionKey);
-        
+
         return Text;
     }
 
@@ -170,7 +170,35 @@ public:
     {
         for (int i = 0; i <= Text.length(); i++)
             Text[i] = char((int)Text[i] - EncryptionKey);
-        
+
         return Text;
+    }
+
+    static string NumberToText(long long Number)
+    {
+        if (Number == 0)
+            return "Zero";
+
+        if (Number < 0)
+            return "Negative " + NumberToText(-Number);
+
+        string units[] = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+                          "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+                          "Seventeen", "Eighteen", "Nineteen"};
+
+        string tens[] = {"", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+
+        if (Number < 20)
+            return units[Number];
+        if (Number < 100)
+            return tens[Number / 10] + (Number % 10 ? " " + NumberToText(Number % 10) : "");
+        if (Number < 1000)
+            return units[Number / 100] + " Hundred" + (Number % 100 ? " " + NumberToText(Number % 100) : "");
+        if (Number < 1000000)
+            return NumberToText(Number / 1000) + " Thousand" + (Number % 1000 ? " " + NumberToText(Number % 1000) : "");
+        if (Number < 1000000000)
+            return NumberToText(Number / 1000000) + " Million" + (Number % 1000000 ? " " + NumberToText(Number % 1000000) : "");
+
+        return NumberToText(Number / 1000000000) + " Billion" + (Number % 1000000000 ? " " + NumberToText(Number % 1000000000) : "");
     }
 };
