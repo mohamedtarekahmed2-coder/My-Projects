@@ -158,6 +158,7 @@ public:
     }
 
     // Methods
+    /*
     void Print()
     {
         cout << "\nClient card:";
@@ -171,7 +172,7 @@ public:
         cout << "\nBalance     : " << AccountBalance;
         cout << "\n____________________________\n";
     }
-
+    */
     static clsBankClient Find(string AccountNumber)
     {
         vector<clsBankClient> vClients;
