@@ -8,54 +8,54 @@ using namespace std;
 class clsPerson
 {
 private:
-    string first_name, last_name, email, phone;
+    string FirstName, LastName, Email, Phone;
 
 public:
 // Constructors
     clsPerson(const string &first_name, const string &last_name, const string &email, const string &phone) 
-                : first_name(first_name), last_name(last_name), email(email), phone(phone) {}
+                : FirstName(first_name), LastName(last_name), Email(email), Phone(phone) {}
 
 // Getters & Setters
     string GetFirstName()
     {
-        return first_name;
+        return FirstName;
     }
     void SetFirstName(const string &name)
     {
-        first_name = name;
+        FirstName = name;
     }
 
     string GetLastName()
     {
-        return last_name;
+        return LastName;
     }
     void SetLastName(const string &name)
     {
-        last_name = name;
+        LastName = name;
     }
 
     string GetEmail()
     {
-        return email;
+        return Email;
     }
     void SetEmail(const string &email_)
     {
-        email = email_;
+        Email = email_;
     }
 
     string GetPhone()
     {
-        return phone;
+        return Phone;
     }
     void SetPhone(const string &phone_)
     {
-        phone = phone_;
+        Phone = phone_;
     }
 
 // Methods
     string FullName()
     {
-        return first_name + " " + last_name;
+        return FirstName + " " + LastName;
     }
 
 };

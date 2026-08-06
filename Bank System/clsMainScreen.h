@@ -10,6 +10,7 @@
 #include "clsUpdateClientScreen.h"
 #include "clsFindClientScreen.h"
 #include "clsTransactionsScreen.h"
+#include "clsManageUsersScreen.h"
 using namespace std;
 
 class clsMainScreen : protected clsScreen
@@ -26,19 +27,6 @@ private:
         eManageUsers,
         eExit
     };
-
-    static int _ReadMainMenuOption()
-    {
-        cout << "Choose what do you want to do? [1 to 8]? ";
-        return clsInputValidate::ReadNumberBetween<int>(0, 9, "Enter Number Between 1 to 8 ");
-    }
-
-    static void _GoBackToMainMenu()
-    {
-        cout << "\nPress any key to go back to Main Menu...\n";
-        system("pause>0");
-        ShowMainMenu();
-    }
 
     static void _PerfromMainMenuOption(enMainMenuOptions MainMenuOption)
     {
@@ -90,6 +78,19 @@ private:
         }
     }
 
+    static int _ReadMainMenuOption()
+    {
+        cout << "Choose what do you want to do? [1 to 8]? ";
+        return clsInputValidate::ReadNumberBetween<int>(0, 9, "Enter Number Between 1 to 8 ");
+    }
+
+    static void _GoBackToMainMenu()
+    {
+        cout << "\nPress any key to go back to Main Menu...\n";
+        system("pause>0");
+        ShowMainMenu();
+    }
+
     static void _ShowAllClientsScreen()
     {
         // cout << "\nClient List Screen Will be here...\n";
@@ -128,7 +129,8 @@ private:
 
     static void _ShowManageUsersMenu()
     {
-        cout << "\nUsers Menu Will be here...\n";
+        // cout << "\nUsers Menu Will be here...\n";
+        clsManageUsersScreen::ShowManageUsersMenu();
     }
 
     static void _ShowEndScreen()

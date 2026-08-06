@@ -20,8 +20,8 @@ private:
     };
 
     enMode _Mode;
-    string _AccountNumber, PIN_code;
-    float AccountBalance;
+    string _AccountNumber, _PIN_code;
+    float _AccountBalance;
     bool _MarkedForDelete = false;
 
     static clsBankClient _ConvertLineToClientObject(string line, string Separator = "#//#")
@@ -40,8 +40,8 @@ private:
         stClientRecord += Client.GetEmail() + Separator;
         stClientRecord += Client.GetPhone() + Separator;
         stClientRecord += Client._AccountNumber + Separator;
-        stClientRecord += Client.PIN_code + Separator;
-        stClientRecord += to_string(Client.AccountBalance);
+        stClientRecord += Client._PIN_code + Separator;
+        stClientRecord += to_string(Client._AccountBalance);
 
         return stClientRecord;
     }
@@ -125,9 +125,14 @@ private:
 
 public:
     // Constructors
-    clsBankClient(enMode mode, const string &first_name, const string &last_name, const string &email, const string &phone, const string &AccountNumber, const string &PIN_code, float AccountBalance)
-        : _Mode(mode), clsPerson(first_name, last_name, email, phone), _AccountNumber(AccountNumber), PIN_code(PIN_code), AccountBalance(AccountBalance) {}
-
+    clsBankClient(enMode mode, string first_name, string last_name, string email, string phone, string AccountNumber, string PIN_code, float AccountBalance)
+        : clsPerson(first_name, last_name, email, phone)
+        {
+            _Mode = mode;
+            _AccountBalance = AccountBalance;
+            _PIN_code = PIN_code;
+            _AccountNumber = AccountNumber;
+        }
     // Getters & Setters
     bool IsEmpty()
     {
@@ -141,20 +146,20 @@ public:
 
     void SetPinCode(const string &PIN_code_)
     {
-        PIN_code = PIN_code_;
+        _PIN_code = PIN_code_;
     }
     string GetPinCode()
     {
-        return PIN_code;
+        return _PIN_code;
     }
 
     void SetAccountBalance(float balance)
     {
-        AccountBalance = balance;
+        _AccountBalance = balance;
     }
     float GetAccountBalance()
     {
-        return AccountBalance;
+        return _AccountBalance;
     }
 
     // Methods
@@ -168,8 +173,8 @@ public:
         cout << "\nEmail       : " << GetEmail();
         cout << "\nPhone       : " << GetPhone();
         cout << "\nAcc. Number : " << _AccountNumber;
-        cout << "\nPassword    : " << PIN_code;
-        cout << "\nBalance     : " << AccountBalance;
+        cout << "\nPassword    : " << _PIN_code;
+        cout << "\nBalance     : " << _AccountBalance;
         cout << "\n____________________________\n";
     }
     */
@@ -210,7 +215,7 @@ public:
             while (getline(MyFile, line))
             {
                 clsBankClient Client = _ConvertLineToClientObject(line);
-                if (Client._AccountNumber == AccountNumber && Client.PIN_code == PIN_code)
+                if (Client._AccountNumber == AccountNumber && Client._PIN_code == PIN_code)
                 {
                     MyFile.close();
                     return Client;
@@ -308,5 +313,23 @@ public:
             TotalBalances += Client.GetAccountBalance();
         }
         return TotalBalances;
+    }
+
+    void Deposit(float Amount)
+    {
+        _AccountBalance += Amount;
+        Save();
+    }
+
+    bool Withdraw(float Amount)
+    {
+        if (Amount > _AccountBalance)
+            return false;
+        else 
+        {
+            _AccountBalance -= Amount;
+            Save();
+            return true;
+        }
     }
 };
