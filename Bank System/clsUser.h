@@ -137,6 +137,11 @@ public:
         _Permissions = Permissions;
     }
 
+    enum enPermissions{
+        eAll = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4, pUpdateClients = 8, 
+        pFindClient = 16, pTransactions = 32, pManageUsers = 64
+    };
+
     bool IsEmpty()
     {
         return (_Mode == enMode::EmptyMode);
@@ -252,6 +257,7 @@ public:
             }
             break;
         }
+        return enSaveResults::svSucceeded;
     }
 
     static bool IsUserExist(string UserName)
