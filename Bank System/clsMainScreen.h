@@ -11,6 +11,7 @@
 #include "clsFindClientScreen.h"
 #include "clsTransactionsScreen.h"
 #include "clsManageUsersScreen.h"
+#include "Global.h"
 using namespace std;
 
 class clsMainScreen : protected clsScreen
@@ -37,26 +38,31 @@ private:
             _ShowAllClientsScreen();
             _GoBackToMainMenu();
             break;
+            
         case enMainMenuOptions::eAddNewClient:
             system("cls");
             _ShowAddNewClientsScreen();
             _GoBackToMainMenu();
             break;
+
         case enMainMenuOptions::eDeleteClient:
             system("cls");
             _ShowDeleteClientScreen();
             _GoBackToMainMenu();
             break;
+
         case enMainMenuOptions::eUpdateClient:
             system("cls");
             _ShowUpdateClientScreen();
             _GoBackToMainMenu();
             break;
+
         case enMainMenuOptions::eFindClient:
             system("cls");
             _ShowFindClientScreen();
             _GoBackToMainMenu();
             break;
+
         case enMainMenuOptions::eShowTransactionsMenu:
             system("cls");
             _ShowTransactionsMenu();
@@ -71,9 +77,7 @@ private:
 
         case enMainMenuOptions::eExit:
             system("cls");
-            _ShowEndScreen();
-            // Login();
-
+            _Logout();
             break;
         }
     }
@@ -133,11 +137,16 @@ private:
         clsManageUsersScreen::ShowManageUsersMenu();
     }
 
-    static void _ShowEndScreen()
-    {
-        cout << "\nEnd Screen Will be here...\n";
-    }
+    // static void _ShowEndScreen()
+    // {
+    //     cout << "\nEnd Screen Will be here...\n";
+    // }
 
+    static void _Logout()
+    {
+        CurrentUser = clsUser::Find("", "");
+        //Then it will go back to main function.
+    }
 
 public:
     static void ShowMainMenu()
