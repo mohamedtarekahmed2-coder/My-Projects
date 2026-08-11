@@ -967,4 +967,27 @@ public:
 
         return DateFrom;
     }
+
+    static string GetSystemDateTimeString()
+    {
+        time_t Time = time(0);
+        tm* now = localtime(&Time);
+        
+        int Year, Month, Day, Hour, Minute, Second;
+        Year = now->tm_year + 1900;
+        Month = now->tm_mon + 1;
+        Day = now->tm_mday;
+        Hour = now->tm_hour;
+        Minute = now->tm_min;
+        Second = now->tm_sec;
+
+        string DateTime = to_string(Day) + "/";
+        DateTime += to_string(Month) + "/";
+        DateTime += to_string(Year) + " - ";
+        DateTime += to_string(Hour) + ":";
+        DateTime += to_string(Minute) + ":";
+        DateTime += to_string(Second);
+
+        return DateTime;
+    }
 };

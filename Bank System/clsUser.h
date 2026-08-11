@@ -6,11 +6,20 @@
 #include <fstream>
 #include "clsPerson.h"
 #include "clsString.h"
-
+#include "clsDate.h"
 using namespace std;
 
 class clsUser : public clsPerson
 {
+public:
+    struct stLoginRegisterRecord
+    {
+        string DateTime;
+        string UserName;
+        string Password;
+        int Permissions;
+    };
+
 private:
     enum enMode
     {
@@ -24,6 +33,17 @@ private:
     string _Password;
     int _Permissions;
     bool _MarkedForDelete = false;
+
+    string _PrepareLoginRecord(string Separator = "#//#")
+    {
+        string LoginRecord = "";
+        LoginRecord += clsDate::GetSystemDateTimeString() + Separator;
+        LoginRecord += _UserName + Separator;
+        LoginRecord += _Password + Separator;
+        LoginRecord += to_string(_Permissions);
+
+        return LoginRecord;
+    }
 
     static clsUser _ConvertLinetoUserObject(string Line, string Separator = "#//#")
     {
@@ -126,6 +146,19 @@ private:
         return clsUser(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
+    static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(string Line, string Separator = "#//#")
+    {
+        vector<string> LoginRegisterDataLine = clsString::Split(Line, Separator);
+        stLoginRegisterRecord LoginRegisterRecord;
+
+        LoginRegisterRecord.DateTime = LoginRegisterDataLine[0];
+        LoginRegisterRecord.UserName = LoginRegisterDataLine[1];
+        LoginRegisterRecord.Password = LoginRegisterDataLine[2];
+        LoginRegisterRecord.Permissions = stoi(LoginRegisterDataLine[3]);
+
+        return LoginRegisterRecord;
+    }
+
 public:
     // Constructors
     clsUser(enMode Mode, string FirstName, string LastName, string Email, string Phone, string UserName, string Password, int Permissions)
@@ -137,9 +170,16 @@ public:
         _Permissions = Permissions;
     }
 
-    enum enPermissions{
-        eAll = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4, pUpdateClients = 8, 
-        pFindClient = 16, pTransactions = 32, pManageUsers = 64
+    enum enPermissions
+    {
+        eAll = -1,
+        pListClients = 1,
+        pAddNewClient = 2,
+        pDeleteClient = 4,
+        pUpdateClients = 8,
+        pFindClient = 16,
+        pTransactions = 32,
+        pManageUsers = 64
     };
 
     bool IsEmpty()
@@ -294,12 +334,45 @@ public:
 
     bool CheckAccessPermission(enPermissions Permission)
     {
-        if(this->_Permissions == enPermissions::eAll)
-        return true;
-
-        if((Permission & this->_Permissions) == Permission)
+        if (this->_Permissions == enPermissions::eAll)
             return true;
-        else 
+
+        if ((Permission & this->_Permissions) == Permission)
+            return true;
+        else
             return false;
+    }
+
+    void RegisterLogin()
+    {
+        string stDataLine = _PrepareLoginRecord();
+
+        ofstream myFile("LoginRegister.txt", ios::app);
+
+        if (myFile.is_open())
+        {
+            myFile << stDataLine << '\n';
+            myFile.close();
+        }
+    }
+
+    static vector<stLoginRegisterRecord> GetLoginRegisterList()
+    {
+        fstream myFile;
+        myFile.open("LoginRegister.txt", ios::in);
+        vector<stLoginRegisterRecord> vLoginRegisterRecord;
+
+        if (myFile.is_open())
+        {
+            string Line;
+            while (getline(myFile, Line))
+            {
+                stLoginRegisterRecord User = _ConvertLoginRegisterLineToRecord(Line);
+                vLoginRegisterRecord.push_back(User);
+            }
+            myFile.close();
+        }
+
+        return vLoginRegisterRecord;
     }
 };

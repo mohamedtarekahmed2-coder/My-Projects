@@ -6,7 +6,7 @@
 #include "clsScreen.h"
 using namespace std;
 
-class clsListUsersScreen : protected clsScreen
+class clsListUserScreen : protected clsScreen
 {
 private:
     static void PrintUserRecordLine(clsUser User)
