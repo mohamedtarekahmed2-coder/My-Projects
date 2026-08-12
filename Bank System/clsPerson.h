@@ -53,7 +53,7 @@ public:
     }
 
 // Methods
-    string FullName()
+    string GetFullName()
     {
         return FirstName + " " + LastName;
     }

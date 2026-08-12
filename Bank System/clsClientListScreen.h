@@ -13,7 +13,7 @@ private:
     static void PrintClientRecordLine(clsBankClient Client)
     {
         cout << "| " << left << setw(15) << Client.GetAccountNumber();
-        cout << "| " << left << setw(20) << Client.FullName();
+        cout << "| " << left << setw(20) << Client.GetFullName();
         cout << "| " << left << setw(12) << Client.GetPhone();
         cout << "| " << left << setw(30) << Client.GetEmail();
         cout << "| " << left << setw(10) << Client.GetPinCode();

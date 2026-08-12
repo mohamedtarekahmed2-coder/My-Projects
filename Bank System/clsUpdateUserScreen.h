@@ -63,22 +63,22 @@ private:
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
             Permissions += clsUser::enPermissions::pListClients;
-        
+
         cout << "\nAdd New Client? [y/n] ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
             Permissions += clsUser::enPermissions::pAddNewClient;
-        
+
         cout << "\nDelete Client? [y/n] ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
             Permissions += clsUser::enPermissions::pDeleteClient;
-        
+
         cout << "\nUpdate Client? [y/n] ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
             Permissions += clsUser::enPermissions::pUpdateClients;
-        
+
         cout << "\nFind Client? [y/n] ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
@@ -88,9 +88,20 @@ private:
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
             Permissions += clsUser::enPermissions::pTransactions;
-        
+
+        cout << "\nManage Users? [y/n] ";
+        cin >> Answer;
+        if (Answer == 'y' || Answer == 'Y')
+            Permissions += clsUser::enPermissions::pManageUsers;
+
+        cout << "\nLogin Register? [y/n] ";
+        cin >> Answer;
+        if (Answer == 'y' || Answer == 'Y')
+            Permissions += clsUser::enPermissions::pLoginRegister;
+
         return Permissions;
     }
+
 public:
     static void ShowUpdateUserScreen()
     {

@@ -179,7 +179,8 @@ public:
         pUpdateClients = 8,
         pFindClient = 16,
         pTransactions = 32,
-        pManageUsers = 64
+        pManageUsers = 64,
+        pLoginRegister = 128
     };
 
     bool IsEmpty()

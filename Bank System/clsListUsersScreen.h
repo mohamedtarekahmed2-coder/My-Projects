@@ -12,7 +12,7 @@ private:
     static void PrintUserRecordLine(clsUser User)
     {
         cout << "| " << left << setw(10) << User.GetUserName();
-        cout << "| " << left << setw(20) << User.FullName();
+        cout << "| " << left << setw(20) << User.GetFullName();
         cout << "| " << left << setw(12) << User.GetPhone();
         cout << "| " << left << setw(30) << User.GetEmail();
         cout << "| " << left << setw(10) << User.GetPassword();
