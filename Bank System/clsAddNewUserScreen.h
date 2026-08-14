@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include "clsUser.h"
+#include "clsUtil.h"
 #include "clsInputValidate.h"
 #include "clsScreen.h"
 using namespace std;
@@ -42,7 +43,7 @@ private:
         cout << "\nEmail       : " << User.GetEmail();
         cout << "\nPhone       : " << User.GetPhone();
         cout << "\nUser Name   : " << User.GetUserName();
-        cout << "\nPassword    : " << User.GetPhone();
+        cout << "\nPassword    : " << User.GetPassword();
         cout << "\nPermissions : " << User.GetPermissions();
         cout << "\n____________________________\n";
     }
