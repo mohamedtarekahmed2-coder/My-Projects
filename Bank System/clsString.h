@@ -689,4 +689,9 @@ public:
         vec.push_back(item);
         return vec;
     }
+
+    static string UpperAllString(string str)
+    {
+        return ToUpper(str);
+    }
 };
